@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: CLOUD-GATEWAY
+    
+  cloud:
+    gateway:
+      routes:
+      - id: user-service
+        uri: lb://USER-SERVICE
+        predicates:
+          - Path=/user/**
+      - id: order-service
+        uri: lb://ORDER-SERVICE
+        predicates:
+          - Path=/order/**
+      - id: payment-service
+        uri: lb://PAYMENT-SERVICE
+        predicates:
+          - Path=/payment/**
+    
+server:
+  port: 8989
+  
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'     
+  
+        
+        
+     
